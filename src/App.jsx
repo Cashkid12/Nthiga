@@ -7,6 +7,8 @@ import About from './pages/About'
 import Projects from './pages/Projects'
 import Skills from './pages/Skills'
 import Contact from './pages/Contact'
+import Login from './components/admin/Login'
+import AdminPanel from './components/admin/AdminPanel'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -18,6 +20,15 @@ function App() {
     }
   }, [])
 
+  const handleLogin = (status) => {
+    setIsAuthenticated(status)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated')
+    setIsAuthenticated(false)
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-slate-100 flex flex-col">
       <Header />
@@ -28,6 +39,16 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/contact" element={<Contact />} />
+          <Route 
+            path="/admin" 
+            element={
+              isAuthenticated ? (
+                <AdminPanel onLogout={handleLogout} />
+              ) : (
+                <Login onLogin={handleLogin} />
+              )
+            } 
+          />
         </Routes>
       </main>
       <Footer />
