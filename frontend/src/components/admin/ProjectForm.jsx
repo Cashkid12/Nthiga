@@ -167,7 +167,7 @@ export default function ProjectForm({ project, onSubmit, onCancel }) {
               Image URL
             </label>
             <input
-              type="url"
+              type="text"
               value={formData.image}
               onChange={(e) => setFormData({ ...formData, image: e.target.value })}
               className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-slate-100 placeholder-slate-400"
